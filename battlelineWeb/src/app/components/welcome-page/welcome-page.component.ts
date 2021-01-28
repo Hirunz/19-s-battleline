@@ -11,7 +11,7 @@ export class WelcomePageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    setTimeout(()=> this.contentVisibiliy=true,10000);
+    setTimeout(()=> this.contentVisibiliy=true,4000);
   }
 
 }
