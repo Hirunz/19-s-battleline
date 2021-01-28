@@ -3,7 +3,8 @@ ul {
     justify-content: space-between;
     list-style-type: none;
     margin-top: -15px;
-    padding: 25px;
+    margin-left: -10px;
+    padding: 25px 20% 25px 20%;
     background-color: white;
     border-bottom: 4px solid black;
 }
@@ -24,7 +25,6 @@ li a {
 }
 
 .nav-bar {
-    padding-top: 15px;
     position: fixed;
     width: 100%;
 }
