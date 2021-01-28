@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { BrPageComponent } from './components/br-page/br-page.component';
 import { MpPageComponent } from './components/mp-page/mp-page.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
