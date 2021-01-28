@@ -1,17 +1,33 @@
 .root{
-    background-image: url("/battlelineWeb/src/assets/images/battleline_welcome.png");
-    background-repeat: no-repeat;
+
+    /* background-repeat: no-repeat; */
+
+   
+  
     
+}
+.heading{
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-  
-    
 }
 h1{
+    
     text-align: center;
     height: 100%;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 96px;
+    line-height: 16px;
+/* identical to box height, or 17% */
+
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+
+    color: rgba(195, 203, 208, 0.9);
 }
