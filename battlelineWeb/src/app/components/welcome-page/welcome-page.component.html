@@ -1,11 +1,14 @@
 
 
-<div *ngIf="!contentVisibiliy">
-    <p>welcome-page works!</p>
+<div *ngIf="contentVisible" class="root">
+    <div>
+        <h1>WELCOME</h1>
+    </div>
+
     
 </div>
 
-<div *ngIf="contentVisibiliy">
+<div *ngIf="!contentVisible">
   
     <app-mp-page></app-mp-page>
 

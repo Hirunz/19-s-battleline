@@ -1,5 +1,17 @@
 .root{
     background-image: url("/battlelineWeb/src/assets/images/battleline_welcome.png");
     background-repeat: no-repeat;
-    background-color: black;
+    
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  
+    
+}
+h1{
+    text-align: center;
+    height: 100%;
 }
