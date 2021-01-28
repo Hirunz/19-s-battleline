@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./welcome-page.component.css']
 })
 export class WelcomePageComponent implements OnInit {
-
+  
+  public contentVisibiliy=false;
   constructor() { }
 
   ngOnInit(): void {
+    setTimeout(()=> this.contentVisibiliy=true,10000);
   }
 
 }
