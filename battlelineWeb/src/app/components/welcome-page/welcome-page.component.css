@@ -1,33 +1,51 @@
-.root{
 
-    /* background-repeat: no-repeat; */
-
-   
-  
-    
-}
 .heading{
+    overflow: hidden;
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-}
-h1{
-    
-    text-align: center;
-    height: 100%;
 
+    /* text-align: center; */
     font-family: Roboto;
     font-style: normal;
     font-weight: bold;
-    font-size: 96px;
-    line-height: 16px;
-/* identical to box height, or 17% */
-
+    font-size: 500%;
+    line-height: 116px;
     letter-spacing: 1.25px;
     text-transform: uppercase;
-
     color: rgba(195, 203, 208, 0.9);
 }
+
+@media only screen and (min-width: 50px) {
+  img {
+    height: 100%;
+    width: auto;
+    overflow: hidden;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    
+  }
+}
+@media only screen and (min-width: 1024px) {
+    img {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+    margin: 0;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+      
+      
+    }
+  }
+

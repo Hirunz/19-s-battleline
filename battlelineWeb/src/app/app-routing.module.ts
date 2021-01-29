@@ -7,15 +7,18 @@ import { WelcomePageComponent } from './components/welcome-page/welcome-page.com
 const routes: Routes = [
   {
     path: '',
-    component: WelcomePageComponent
+    component: WelcomePageComponent,
+    data: { animationState: 'One' }
   },
   {
     path: 'mp',
-    component: MpPageComponent
+    component: MpPageComponent,
+    data: { animationState: 'Two' }
   },
   {
     path: 'br',
-    component: BrPageComponent
+    component: BrPageComponent,
+    data: { animationState: 'Three' }
   }
 ];
 

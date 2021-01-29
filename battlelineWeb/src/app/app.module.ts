@@ -4,9 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
-import { BrPageComponent } from './components/br-page/br-page.component';
-import { MpPageComponent } from './components/mp-page/mp-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +14,9 @@ import { MpPageComponent } from './components/mp-page/mp-page.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

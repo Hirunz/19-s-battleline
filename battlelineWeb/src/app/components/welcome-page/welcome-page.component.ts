@@ -8,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class WelcomePageComponent implements OnInit {
     
     public contentVisible=true;
+    
   constructor() { }
 
   ngOnInit(): void {
-    // setTimeout(()=> this.contentVisibiliy=false,10000);
+   
+    setTimeout(()=> this.contentVisible=false, 4000);
   }
 
 }
