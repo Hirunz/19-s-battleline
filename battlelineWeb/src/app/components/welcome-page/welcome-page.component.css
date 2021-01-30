@@ -46,34 +46,10 @@
   #root{
     background-image: url('../../../assets/images/battleline_welcome_mobile.png');
   }
-  img {
-    height: 100%;
-    width: auto;
-    overflow: hidden;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    
-  }
 }
 @media only screen and (min-width: 1024px) {
   #root{
     background-image: url('../../../assets/images/battleline_welcome.png');
   }
-    img {
-     
-      width: 100%;
-      height: auto;
-      overflow: hidden;
-      margin: 0;
-      position: absolute;
-      top: 70%;
-      left: 50%;
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
   } */
 

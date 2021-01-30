@@ -8,12 +8,4 @@ body{
    
 }
 
-@keyframes bodyColor {
-    0% {background-color: white;}
-    85% {background-color: white;}
-    100% {background-color: #09161f;}
-  }
-
-
-
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
