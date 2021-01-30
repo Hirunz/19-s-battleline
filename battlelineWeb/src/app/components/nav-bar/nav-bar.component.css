@@ -4,9 +4,9 @@ ul {
     list-style-type: none;
     margin-top: -15px;
     margin-left: -10px;
-    padding: 25px 20% 25px 20%;
-    background-color: white;
-    border-bottom: 4px solid black;
+    padding: 35px 20% 20px 20%;
+    background-color: #09161E;
+    border-bottom: 2px solid #FFFFFF;
 }
 
 li:hover{
@@ -20,7 +20,7 @@ li {
 }
 
 li a {
-    color: black;
+    color: #FFFFFF;
     text-decoration: none;
 }
 
