@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrPageComponent } from './components/br-page/br-page.component';
+import { LoginComponent } from './components/login/login.component';
 import { MpPageComponent } from './components/mp-page/mp-page.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 
@@ -20,6 +21,11 @@ const routes: Routes = [
     component: BrPageComponent,
     
   },
+  {
+    path: 'login',
+    component: LoginComponent,
+    
+  },
 
 ];
 
@@ -32,5 +38,6 @@ export class AppRoutingModule { }
 export const routingComponents=[
   MpPageComponent,
   BrPageComponent,
-  WelcomePageComponent
+  WelcomePageComponent,
+  LoginComponent
 ]
