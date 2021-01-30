@@ -1,4 +1,12 @@
-
+#root{
+  background-image: url('../../../assets/images/battleline_welcome.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size:contain;
+  height: 100vh;
+  /* width: 100vw; */
+}
 
 .container {
   -webkit-animation: smooth 7s ease-in;
@@ -33,9 +41,11 @@
     color: rgba(195, 203, 208, 0.9);
 }
 
-@media only screen and (min-width: 50px) {
-  img {
-    
+@media only screen and (min-width: 375px) {
+  #root{
+    background-image: url('../../../assets/images/battleline_welcome_mobile.png');
+  }
+  /* img {
     height: 100%;
     width: auto;
     overflow: hidden;
@@ -46,10 +56,13 @@
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     
-  }
+  } */
 }
 @media only screen and (min-width: 1024px) {
-    img {
+  #root{
+    background-image: url('../../../assets/images/battleline_welcome.png');
+  }
+    /* img {
      
       width: 100%;
       height: auto;
@@ -60,8 +73,6 @@
       left: 50%;
       -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
-      
-      
-    }
+    } */
   }
 

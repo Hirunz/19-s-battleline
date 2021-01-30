@@ -2,6 +2,7 @@ ul {
     display: flex;
     justify-content: space-between;
     list-style-type: none;
+    font-size: 16px;
     margin-top: -15px;
     margin-left: -10px;
     padding: 35px 20% 20px 20%;
