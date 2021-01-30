@@ -8,6 +8,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MpScoresComponent } from './components/mp-scores/mp-scores.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
+
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -55,6 +59,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,

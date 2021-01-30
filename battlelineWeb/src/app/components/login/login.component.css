@@ -1,0 +1,18 @@
+.login-main{
+    
+
+    margin: 0%;
+
+    max-width: 300px;
+    
+}
+mat-card{
+    margin: 0;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+    min-width: 300px;
+}
