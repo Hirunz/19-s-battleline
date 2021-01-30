@@ -12,6 +12,7 @@
   0% { opacity: 1;}
   100% { opacity: 0;}
 }
+
 .heading{
     overflow: hidden;
     margin: 0;
@@ -47,20 +48,20 @@
     
   }
 }
-@media only screen and (min-width: 1024px) {
+/* @media only screen and (min-width: 1024px) {
     img {
      
       width: 100%;
       height: auto;
       overflow: hidden;
-    margin: 0;
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+      margin: 0;
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
       
       
     }
-  }
+  } */
 
