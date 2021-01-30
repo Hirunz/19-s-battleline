@@ -43,6 +43,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { HeaderComponent } from './components/user-view/header/header.component';
+import { BrLoginComponent } from './components/admin-view/br/br-login/br-login.component';
+import { BrScoresComponent } from './components/admin-view/br/br-scores/br-scores.component';
 
 
 
@@ -54,6 +56,8 @@ import { HeaderComponent } from './components/user-view/header/header.component'
     FooterComponent,
     MpScoresComponent,
     HeaderComponent,
+    BrLoginComponent,
+    BrScoresComponent,
     
   
   ],

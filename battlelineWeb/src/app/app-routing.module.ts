@@ -1,3 +1,4 @@
+import { BrLoginComponent } from './components/admin-view/br/br-login/br-login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrPageComponent } from './components/user-view/br-page/br-page.component';
@@ -22,8 +23,13 @@ const routes: Routes = [
     
   },
   {
-    path: 'login',
+    path: 'mp-login',
     component: LoginComponent,
+    
+  },
+  {
+    path: 'br-login',
+    component: BrLoginComponent,
     
   },
 
