@@ -1,17 +1,15 @@
-
-<div *ngIf="contentVisible" id="root">
-    <img src="../../../assets/images/battleline_welcome.png" height="=32px" width="45px" alt="backgroung image">
-    <div class="heading">
-        WELCOME
+<div  *ngIf="contentVisible" id="root">
+    <div class="container">
+        <img src="../../../assets/images/battleline_welcome.png" height="=32px" width="45px" alt="backgroung image">
+        <div class="heading">
+            WELCOME
+        </div>   
     </div>
-
     
 </div>
 
 <div *ngIf="!contentVisible">
-  
     <app-mp-page></app-mp-page>
-
 </div>
 
 

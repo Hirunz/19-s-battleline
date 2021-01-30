@@ -2,7 +2,14 @@
 body{
     margin: 0;
     overflow: hidden;
-   background-color: #09161f;
+    animation-name: bodyColor;
+    animation-duration: 7s;
+ background-color:#09161f;
    
 }
+
+@keyframes bodyColor {
+    from {background-color: white;}
+    to {background-color: #09161f;}
+  }
 

@@ -8,17 +8,17 @@ const routes: Routes = [
   {
     path: '',
     component: WelcomePageComponent,
-    data: { animationState: 'One' }
+    
   },
   {
     path: 'mp',
     component: MpPageComponent,
-    data: { animationState: 'Two' }
+    
   },
   {
     path: 'br',
     component: BrPageComponent,
-    data: { animationState: 'Three' }
+    
   }
 ];
 

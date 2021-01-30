@@ -1,4 +1,17 @@
 
+
+.container {
+  -webkit-animation: smooth 7s ease-in;
+  -moz-animation: smooth 7s ease-in;
+  -o-animation: smooth 7s ease-in;
+  -ms-animation: smooth 7s ease-in;
+  animation: smooth 7s ease-in;
+}
+
+@keyframes smooth {
+  0% { opacity: 1;}
+  100% { opacity: 0;}
+}
 .heading{
     overflow: hidden;
     margin: 0;
@@ -21,6 +34,7 @@
 
 @media only screen and (min-width: 50px) {
   img {
+    
     height: 100%;
     width: auto;
     overflow: hidden;
@@ -35,6 +49,7 @@
 }
 @media only screen and (min-width: 1024px) {
     img {
+     
       width: 100%;
       height: auto;
       overflow: hidden;
