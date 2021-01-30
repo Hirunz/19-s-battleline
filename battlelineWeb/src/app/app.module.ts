@@ -1,12 +1,12 @@
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { NavBarComponent } from './components/user-view/nav-bar/nav-bar.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { FooterComponent } from './components/user-view/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MpScoresComponent } from './components/mp-scores/mp-scores.component';
+import { MpScoresComponent } from './components/admin-view/mp/mp-scores/mp-scores.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -42,7 +42,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { HeaderComponent } from './components/header/header.component';
+import { HeaderComponent } from './components/user-view/header/header.component';
 
 
 
