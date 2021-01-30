@@ -1,0 +1,12 @@
+[
+    {
+        "teamId": "1",
+        "teamName": "name",
+        "points": 15,
+        "wins": 3,
+        "losses": 4,
+        "roundsWon": 5,
+        "roundsLost": 4,
+        "disqualified": true
+    }
+]
