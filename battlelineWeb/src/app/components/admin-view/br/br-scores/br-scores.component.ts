@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -10,32 +11,30 @@ import { DatabaseService } from 'src/app/Services/database.service';
   templateUrl: './br-scores.component.html',
   styleUrls: ['./br-scores.component.css']
 })
+
+
+//---------------------------------
+// TODO: Add/Update use one form.
+//---------------------------------
+
 export class BrScoresComponent implements OnInit {
-  private playerId!: number;
-  private playerName!: string;
-  private rank!: number;
-  private kills!: number;
-  private points!: number;
-  // private disqualified!: boolean;
-
+  public playerInputValidity=true;
+  public disqualifiedInputValidity=true;
   public brPlayersForm: FormGroup;
-
   public brPlayers: IBrPlayer[] = [];
-  
+
   constructor(private databaseService: DatabaseService) { 
     // this.brPlayers=[]
-
-    this.getPlayers();
-
+    this.getPlayers();    
     this.brPlayersForm = new FormGroup({
-      'playerId': new FormControl({
-        value: this.brPlayers.length+1000,
-        disabled: true
-      }),
+      // 'playerId': new FormControl({
+      //   value: "-",
+      //   disabled: true
+      // }),
       'playerName': new FormControl(''),
       'rank': new FormControl(''),
       'kills': new FormControl(''),
-      'disqualified': new FormControl(''),
+      'disqualified': new FormControl('0'),
     });
   }
 
@@ -43,9 +42,47 @@ export class BrScoresComponent implements OnInit {
   }
 
   onSubmit(): void{
-    this.databaseService.addBrPlayer(this.brPlayersForm.value);
-    this.brPlayersForm.reset();
-    // this.brPlayersForm.
+    let userInput=this.brPlayersForm.value;
+
+    if(this.teamExists(userInput)){
+      this.playerInputValidity=false;
+    } else if (userInput.disqualified < 0 || userInput.disqualified > 1) {
+      this.disqualifiedInputValidity=false;
+    } else {
+
+      this.disqualifiedInputValidity=true;
+      this.playerInputValidity=true;
+
+      
+      if (userInput.disqualified == 1){
+        userInput.disqualified = true;
+      } else {
+        userInput.disqualified = false;
+      }
+      
+      userInput.playerId= this.brPlayers.length+1001;
+
+      //------------------------POINT FORMULA--------------------------------- 
+      userInput.points = 101-userInput.rank;
+      //----------------------------------------------------------------------
+
+      this.databaseService.addBrPlayer(userInput);
+      this.brPlayersForm.reset();
+      this.brPlayersForm = new FormGroup({
+        // 'playerId': new FormControl({
+        //   value: "-",
+        //   disabled: true
+        // }),
+        'disqualified': new FormControl('0'),
+      });
+    }
+
+    // this.databaseService.addBrPlayer(this.brPlayersForm.value);
+    // this.brPlayersForm.reset();
+  }
+
+  update(): void{
+    
   }
 
   getPlayers(){
@@ -61,4 +98,12 @@ export class BrScoresComponent implements OnInit {
     });
   }
 
+  teamExists(o: IBrPlayer): boolean{   
+    for(var player of this.brPlayers){
+      if(player.playerName.toLowerCase()==o.playerName.toLowerCase()){
+        return true;
+      }
+    }
+    return false;
+  }
 }

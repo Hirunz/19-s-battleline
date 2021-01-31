@@ -1,18 +1,17 @@
 <div>
     <form [formGroup]="brPlayersForm" (ngSubmit)="onSubmit()">
-    <mat-card >
-        <section></section>
+    <mat-card>
         <mat-card-header>
             <mat-card-title>Add BR Player</mat-card-title>
         </mat-card-header>
         
         <mat-card-content fxLayout="column">
             <section>
-            <mat-form-field>
+            <!-- <mat-form-field>
                 <input formControlName="playerId" type="text" matInput placeholder="Player ID">
             </mat-form-field>
 
-            <br>
+            <br> -->
             
             <mat-form-field>
                 <input formControlName="playerName" type="text"  matInput placeholder="Player Name">
@@ -35,6 +34,16 @@
             <mat-form-field>
                 <input formControlName="disqualified" type="number"  matInput placeholder="Disqualified - 1, Qualified - 0">
             </mat-form-field>
+
+            <br>
+            <mat-error *ngIf="!playerInputValidity" >
+                ERROR => Player already exists.
+            </mat-error>
+
+            <br>
+            <mat-error *ngIf="!disqualifiedInputValidity" >
+                ERROR => Disqualified Input can only be 0 or 1!
+            </mat-error>
             
             <br>
         </section>
@@ -59,5 +68,5 @@
             <button type="submit" mat-raised-button color="primary">Add Player</button>
         </mat-card-actions>
     </mat-card>
-</form>
+    </form>
 </div>
