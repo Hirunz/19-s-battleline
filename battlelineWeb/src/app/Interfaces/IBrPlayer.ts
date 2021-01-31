@@ -1,4 +1,5 @@
 export interface IBrPlayer {
+    $key: string,
     playerId: number,
     playerName: string,
     rank: number,

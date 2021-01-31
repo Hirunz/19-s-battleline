@@ -1,6 +1,9 @@
-import { IBrPlayer } from './../../../../Interfaces/IBrPlayer';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { IBrPlayer } from './../../../../Interfaces/IBrPlayer';
+
+import { DatabaseService } from 'src/app/Services/database.service';
 
 @Component({
   selector: 'app-br-scores',
@@ -13,30 +16,57 @@ export class BrScoresComponent implements OnInit {
   private rank!: number;
   private kills!: number;
   private points!: number;
-  private disqualified!: boolean;
+  // private disqualified!: boolean;
 
-  private loginForm!: FormGroup;
+  public brPlayersForm: FormGroup;
 
-  public playerList:IBrPlayer[] = [
-    { "playerId": 1, "playerName": "A", "rank": 1, "kills": 10, "disqualified": false},
-    { "playerId": 2, "playerName": "B", "rank": 2, "kills": 9, "disqualified": false},
-    { "playerId": 3, "playerName": "C", "rank": 3, "kills": 8, "disqualified": false},
-    { "playerId": 4, "playerName": "D", "rank": 4, "kills": 7, "disqualified": false}
-  ];
+  public brPlayers: IBrPlayer[];
   
-  constructor() { }
+  // checked = false;
+
+  constructor(private databaseService: DatabaseService) { 
+    this.brPlayers=[]
+
+    this.brPlayersForm = new FormGroup({
+      'playerId': new FormControl('', [
+        Validators.required
+      ]),
+      'playerName': new FormControl('', [
+        Validators.required
+      ])
+      ,
+      'rank': new FormControl('', [
+        Validators.required
+      ])
+      ,
+      'kills': new FormControl('', [
+        Validators.required
+      ])
+      ,
+    });
+  }
 
   ngOnInit(): void {
   }
 
-  /**
-   * findPlayer
-   */
-  public findPlayer(id: number) {
-    return this.playerList.find(i => i.playerId == id);
+  onSubmit(): void{
+    this.databaseService.addBrPlayer(this.brPlayersForm.value);
+    this.brPlayersForm.reset();
   }
 
-  private onSubmit() {
-    
+  getPlayers(){
+    this.databaseService.getBrPlayers().snapshotChanges().forEach(playersSnapshot=>{
+      this.brPlayers=[]
+       playersSnapshot.forEach(matchSnapshot=>{
+          let match=<IBrPlayer>matchSnapshot.payload.toJSON();
+          
+         if(matchSnapshot.key)
+          match['$key']= matchSnapshot.key;
+          this.brPlayers.push(match as IBrPlayer);
+          
+
+        });
+    });
   }
+
 }
