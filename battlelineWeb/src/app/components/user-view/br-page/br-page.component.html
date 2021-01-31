@@ -3,5 +3,42 @@
 <div id="background">
     <div class="ng-container">
         <app-header gameMode="Battle Royale"></app-header>
+
+        <div class="table">
+            <table mat-table [dataSource]="brPlayers" class="mat-elevation-z8">
+              
+                <!-- ID Column -->
+                <ng-container matColumnDef="playerId">
+                  <th mat-header-cell *matHeaderCellDef> Player ID </th>
+                  <td mat-cell *matCellDef="let player"> {{player.playerId}} </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="playerName">
+                  <th mat-header-cell *matHeaderCellDef>Player Name </th>
+                  <td mat-cell *matCellDef="let player"> {{player.playerName}} </td>
+                </ng-container>
+              
+                <!-- Points Column -->
+                <ng-container matColumnDef="points">
+                  <th mat-header-cell *matHeaderCellDef> Points </th>
+                  <td mat-cell *matCellDef="let player"> {{player.points}} </td>
+                </ng-container>
+              
+                <!-- Rank Column -->
+                <ng-container matColumnDef="rank">
+                  <th mat-header-cell *matHeaderCellDef> Rank </th>
+                  <td mat-cell *matCellDef="let player"> {{player.rank}} </td>
+                </ng-container>
+        
+                 <!-- Kills Column -->
+                <ng-container matColumnDef="kills">
+                    <th mat-header-cell *matHeaderCellDef> Kills </th>
+                    <td mat-cell *matCellDef="let player"> {{player.kills}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+            </table>
     </div>
 </div>

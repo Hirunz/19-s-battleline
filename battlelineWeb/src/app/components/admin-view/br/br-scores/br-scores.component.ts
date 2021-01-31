@@ -20,18 +20,22 @@ export class BrScoresComponent implements OnInit {
 
   public brPlayersForm: FormGroup;
 
-  public brPlayers: IBrPlayer[];
+  public brPlayers: IBrPlayer[] = [];
   
-   checked = false;
-
   constructor(private databaseService: DatabaseService) { 
-    this.brPlayers=[]
+    // this.brPlayers=[]
+
+    this.getPlayers();
 
     this.brPlayersForm = new FormGroup({
-      'playerId': new FormControl(''),
+      'playerId': new FormControl({
+        value: this.brPlayers.length+1000,
+        disabled: true
+      }),
       'playerName': new FormControl(''),
       'rank': new FormControl(''),
       'kills': new FormControl(''),
+      'disqualified': new FormControl(''),
     });
   }
 
@@ -39,22 +43,20 @@ export class BrScoresComponent implements OnInit {
   }
 
   onSubmit(): void{
-    console.log(this.checked)
     this.databaseService.addBrPlayer(this.brPlayersForm.value);
     this.brPlayersForm.reset();
+    // this.brPlayersForm.
   }
 
   getPlayers(){
     this.databaseService.getBrPlayers().snapshotChanges().forEach(playersSnapshot=>{
       this.brPlayers=[]
-       playersSnapshot.forEach(matchSnapshot=>{
-          let match=<IBrPlayer>matchSnapshot.payload.toJSON();
-          
-         if(matchSnapshot.key)
-          match['$key']= matchSnapshot.key;
-          this.brPlayers.push(match as IBrPlayer);
-          
-
+       playersSnapshot.forEach(playerSnapshot=>{
+          let player=<IBrPlayer>playerSnapshot.payload.toJSON();
+          // console.log(player)
+         if(playerSnapshot.key)
+          player['$key']= playerSnapshot.key;
+          this.brPlayers.push(player as IBrPlayer);
         });
     });
   }
