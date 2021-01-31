@@ -3,5 +3,6 @@ export interface IBrPlayer {
     playerName: string,
     rank: number,
     kills: number,
+    points?: number,
     disqualified: boolean
 }
