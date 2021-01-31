@@ -16,6 +16,8 @@ import { DatabaseService } from 'src/app/Services/database.service';
 })
 export class MpScoresComponent implements OnInit {
   public inputsValid2=true;
+  public inputsValid1=true;
+  public verify=false;
 
   public mpMatchForm: FormGroup;
   public mpTeamsForm: FormGroup;
@@ -23,17 +25,22 @@ export class MpScoresComponent implements OnInit {
    public mpMatches: IMpMatch[]=[];
   public  mpTeams: IMPTeam[]=[];
 
+  public team1Name: string=""
+  public team2Name: string=""
+
   constructor(private databaseService: DatabaseService) {
-    this.mpMatches=[]
+    this.getMatches();
     this.getTeams();
 
     this.mpMatchForm = new FormGroup({
       'team1': new FormControl(''),
-      'team2': new FormControl('')
-      ,
-      'team1Rounds': new FormControl('')
-      ,
-      'team2Rounds': new FormControl('')
+      'team1Name': new FormControl({value: this.team1Name, disabled: true}),
+      'team2': new FormControl(''),
+      'team2Name': new FormControl({value: this.team2Name, disabled: true}),
+      'team1Rounds': new FormControl(''),
+      'team2Rounds': new FormControl(''),
+      
+      
     });
 
     this.mpTeamsForm = new FormGroup({
@@ -48,13 +55,38 @@ export class MpScoresComponent implements OnInit {
   }
 
 
-  onMatchSubmit1(): void{
-    this.databaseService.addMpMatch(this.mpMatchForm.value)
+  async onMatchSubmit(){
+    let userInput=this.mpMatchForm.value;
+
+    // if()
+    await this.databaseService.addMpMatch(this.mpMatchForm.value)
     this.mpMatchForm.reset();
   }
 
-  onTeamSubmit2(): void{
+  onVerify(){
+    let userInput=this.mpMatchForm.value;
+
+
+      this.team1Name=this.getTeam(userInput.team1);
+      this.team2Name=this.getTeam(userInput.team2);
+      console.log(this.team1Name)
+      console.log(this.team2Name)
+      
+    
+      if(this.team1Name !="Team Not Found" && this.team2Name !="Team Not Found"){
+        this.verify=true;
+      }
+      else{
+        this.verify=false;
+      }
+    
+  }
+
+
+
+  async onTeamSubmit(){
     let userInput=this.mpTeamsForm.value;
+    console.log(userInput.value)
 
     if(this.teamExists(userInput)){
       this.inputsValid2=false;
@@ -75,16 +107,13 @@ export class MpScoresComponent implements OnInit {
       this.databaseService.addMpTeam(userInput)
       this.mpTeamsForm.reset();
     }
-
-    
   }
 
-  getTeams(){
-    this.databaseService.getMpTeams().snapshotChanges().forEach(teamsSnapshot=>{
+  async getTeams(){
+   await this.databaseService.getMpTeams().snapshotChanges().forEach(teamsSnapshot=>{
       this.mpTeams=[]
        teamsSnapshot.forEach(teamSnapshot=>{
           let team=<IMPTeam>teamSnapshot.payload.toJSON();
-          console.log(team)
          if(teamSnapshot.key)
           team['$key']= teamSnapshot.key;
           this.mpTeams.push(team as IMPTeam);
@@ -92,9 +121,41 @@ export class MpScoresComponent implements OnInit {
 
         });
     });
+   
   }
 
-  
+  async getMatches(){
+    await this.databaseService.getMpMatches().snapshotChanges().forEach(matchesSnapshot=>{
+      this.mpMatches=[]
+      matchesSnapshot.forEach(matchSnapshot=>{
+          let match=<IMpMatch>matchSnapshot.payload.toJSON();
+          console.log(match)
+         if(matchSnapshot.key)
+         match['$key']= matchSnapshot.key;
+          this.mpMatches.push(match as IMpMatch);
+        });
+    });
+   
+  }
+
+
+  getTeam(id: number){
+    for(var team of this.mpTeams){
+      if(team.teamId==id){
+        return team.teamName;
+      }
+    }
+    return "Team Not Found";
+  }
+
+  teamExists2(id: number){
+    for(var team of this.mpTeams){
+      if(team.teamId==id){
+        return true;
+      }
+    }
+    return false;
+  }
 
   teamExists(o: IMPTeam): boolean{   
     for(var team of this.mpTeams){
