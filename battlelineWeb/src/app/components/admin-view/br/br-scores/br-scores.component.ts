@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrScoresComponent implements OnInit {
 
-  IBrPlayer
+  public playerList:IBrPlayer[] = [];
   
   constructor() { }
 
