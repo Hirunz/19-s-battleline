@@ -22,27 +22,16 @@ export class BrScoresComponent implements OnInit {
 
   public brPlayers: IBrPlayer[];
   
-  // checked = false;
+   checked = false;
 
   constructor(private databaseService: DatabaseService) { 
     this.brPlayers=[]
 
     this.brPlayersForm = new FormGroup({
-      'playerId': new FormControl('', [
-        Validators.required
-      ]),
-      'playerName': new FormControl('', [
-        Validators.required
-      ])
-      ,
-      'rank': new FormControl('', [
-        Validators.required
-      ])
-      ,
-      'kills': new FormControl('', [
-        Validators.required
-      ])
-      ,
+      'playerId': new FormControl(''),
+      'playerName': new FormControl(''),
+      'rank': new FormControl(''),
+      'kills': new FormControl(''),
     });
   }
 
@@ -50,6 +39,7 @@ export class BrScoresComponent implements OnInit {
   }
 
   onSubmit(): void{
+    console.log(this.checked)
     this.databaseService.addBrPlayer(this.brPlayersForm.value);
     this.brPlayersForm.reset();
   }

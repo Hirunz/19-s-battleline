@@ -26,6 +26,7 @@ li a {
 }
 
 .nav-bar {
+    z-index: 10;
     position: fixed;
     width: 100%;
 }

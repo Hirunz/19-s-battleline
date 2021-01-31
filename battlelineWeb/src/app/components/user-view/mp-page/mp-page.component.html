@@ -2,56 +2,57 @@
 <div id="background">
     <div class="ng-container">
         <app-header gameMode="Multiplayer"></app-header>
+
+        <div class="table">
+          <table mat-table [dataSource]="mpTeams" class="mat-elevation-z8">
+            
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Team ID </th>
+                <td mat-cell *matCellDef="let team"> {{team.teamId}} </td>
+              </ng-container>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Team Name </th>
+                <td mat-cell *matCellDef="let team"> {{team.teamName}} </td>
+              </ng-container>
+            
+              <!-- Points Column -->
+              <ng-container matColumnDef="points">
+                <th mat-header-cell *matHeaderCellDef> Points </th>
+                <td mat-cell *matCellDef="let team"> {{team.points}} </td>
+              </ng-container>
+            
+              <!-- wins Column -->
+              <ng-container matColumnDef="wins">
+                <th mat-header-cell *matHeaderCellDef> Wins </th>
+                <td mat-cell *matCellDef="let team"> {{team.wins}} </td>
+              </ng-container>
+      
+               <!-- losses Column -->
+               <ng-container matColumnDef="losses">
+                  <th mat-header-cell *matHeaderCellDef> Losses </th>
+                  <td mat-cell *matCellDef="let team"> {{team.losses}} </td>
+                </ng-container>
+      
+                 <!-- rounds won Column -->
+              <ng-container matColumnDef="roundsWon">
+                  <th mat-header-cell *matHeaderCellDef> Rounds Won </th>
+                  <td mat-cell *matCellDef="let team"> {{team.roundsWon}} </td>
+                </ng-container>
+      
+                 <!-- rounds lost Column -->
+              <ng-container matColumnDef="roundsLost">
+                  <th mat-header-cell *matHeaderCellDef> Rounds Lost </th>
+                  <td mat-cell *matCellDef="let team"> {{team.roundsLost}} </td>
+                </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="columns"></tr>
+              <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+            </table>
+      </div>
+            
     </div>
-</div>
-
-<div class="table">
-    <table mat-table [dataSource]="mpTeams" class="mat-elevation-z8">
-      
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> Team ID </th>
-          <td mat-cell *matCellDef="let team"> {{team.teamId}} </td>
-        </ng-container>
-      
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Team Name </th>
-          <td mat-cell *matCellDef="let team"> {{team.teamName}} </td>
-        </ng-container>
-      
-        <!-- Points Column -->
-        <ng-container matColumnDef="points">
-          <th mat-header-cell *matHeaderCellDef> Points </th>
-          <td mat-cell *matCellDef="let team"> {{team.points}} </td>
-        </ng-container>
-      
-        <!-- wins Column -->
-        <ng-container matColumnDef="wins">
-          <th mat-header-cell *matHeaderCellDef> Wins </th>
-          <td mat-cell *matCellDef="let team"> {{team.wins}} </td>
-        </ng-container>
-
-         <!-- losses Column -->
-         <ng-container matColumnDef="losses">
-            <th mat-header-cell *matHeaderCellDef> Losses </th>
-            <td mat-cell *matCellDef="let team"> {{team.losses}} </td>
-          </ng-container>
-
-           <!-- rounds won Column -->
-        <ng-container matColumnDef="roundsWon">
-            <th mat-header-cell *matHeaderCellDef> Rounds Won </th>
-            <td mat-cell *matCellDef="let team"> {{team.roundsWon}} </td>
-          </ng-container>
-
-           <!-- rounds lost Column -->
-        <ng-container matColumnDef="roundsLost">
-            <th mat-header-cell *matHeaderCellDef> Rounds Lost </th>
-            <td mat-cell *matCellDef="let team"> {{team.roundsLost}} </td>
-          </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="columns"></tr>
-        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-      </table>
 </div>
 

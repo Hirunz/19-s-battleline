@@ -10,7 +10,7 @@
   margin: 0%;
   max-width: 300px;    
 }
-.login-main mat-card{
+.login-mat{
   margin: 0;
   position: absolute;
   top: 45%;
