@@ -1,5 +1,5 @@
 <div >
-    <form [formGroup]="mpMatchForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="mpMatchForm" (ngSubmit)="onMatchSubmit1()">
     <mat-card >
         
         <mat-card-header>
@@ -13,6 +13,7 @@
             <mat-form-field>
                 <input formControlName="team2" type="text"  matInput placeholder="Team 2">
             </mat-form-field>
+            <br>
             <mat-form-field>
                 <input formControlName="team1Rounds" type="number"matInput placeholder="Team 1 Rounds">
             </mat-form-field>
@@ -28,10 +29,9 @@
     </mat-card>
 </form>
 </div>
-<br>
-<br>
-<!-- <div >
-    <form [formGroup]="mpTeamsForm" (ngSubmit)="onSubmit()">
+
+<div >
+    <form [formGroup]="mpTeamsForm" (ngSubmit)="onTeamSubmit2()">
     <mat-card >
         
         <mat-card-header>
@@ -39,12 +39,12 @@
         </mat-card-header>
         <mat-card-content fxLayout="column">
             <mat-form-field>
-                <input formControlName="teamId" type="number"matInput placeholder="Team ID">
-            </mat-form-field>
-            <br>
-            <mat-form-field>
                 <input formControlName="teamName" type="text"  matInput placeholder="Team Name">
             </mat-form-field>
+            <br>
+            <mat-error *ngIf="!inputsValid2" >
+                ERROR => Team already exists.
+            </mat-error>
            
         </mat-card-content>
         <mat-card-actions align="end">
@@ -52,12 +52,12 @@
         </mat-card-actions>
     </mat-card>
 </form>
-</div> -->
+</div>
 
-<div >
+<!-- <div >
    <pre>
        {{mpMatches | json}}
    </pre>
    <button  mat-raised-button color="primary" type="button"(click)="getMatches()">Get matches</button>
 
-</div>
+</div> -->

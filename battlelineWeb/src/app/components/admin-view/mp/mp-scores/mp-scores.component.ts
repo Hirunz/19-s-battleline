@@ -15,40 +15,29 @@ import { DatabaseService } from 'src/app/Services/database.service';
   styleUrls: ['./mp-scores.component.css']
 })
 export class MpScoresComponent implements OnInit {
-  public mpMatchForm: FormGroup
-  public mpTeamsForm: FormGroup
+  public inputsValid2=true;
 
-   public mpMatches: IMpMatch[]
-  public  mpTeams: IMPTeam[]
+  public mpMatchForm: FormGroup;
+  public mpTeamsForm: FormGroup;
+
+   public mpMatches: IMpMatch[]=[];
+  public  mpTeams: IMPTeam[]=[];
 
   constructor(private databaseService: DatabaseService) {
     this.mpMatches=[]
-    this.mpTeams=[]
+    this.getTeams();
 
     this.mpMatchForm = new FormGroup({
-      'team1': new FormControl('', [
-        Validators.required
-      ]),
-      'team2': new FormControl('', [
-        Validators.required
-      ])
+      'team1': new FormControl(''),
+      'team2': new FormControl('')
       ,
-      'team1Rounds': new FormControl('', [
-        Validators.required
-      ])
+      'team1Rounds': new FormControl('')
       ,
-      'team2Rounds': new FormControl('', [
-        Validators.required
-      ])
+      'team2Rounds': new FormControl('')
     });
 
     this.mpTeamsForm = new FormGroup({
-      'teamId': new FormControl('', [
-        Validators.required
-      ]),
-      'teamName': new FormControl('', [
-        Validators.required
-      ])
+      'teamName': new FormControl('')
 
     });
 
@@ -59,27 +48,64 @@ export class MpScoresComponent implements OnInit {
   }
 
 
-  onSubmit(): void{
-    console.log(this.mpTeams)
-   
+  onMatchSubmit1(): void{
     this.databaseService.addMpMatch(this.mpMatchForm.value)
     this.mpMatchForm.reset();
   }
 
-  getMatches(){
-    this.databaseService.getMpMatches().snapshotChanges().forEach(matchesSnapshot=>{
-      this.mpMatches=[]
-       matchesSnapshot.forEach(matchSnapshot=>{
-          let match=<IMpMatch>matchSnapshot.payload.toJSON();
-          
-         if(matchSnapshot.key)
-          match['$key']= matchSnapshot.key;
-          this.mpMatches.push(match as IMpMatch);
+  onTeamSubmit2(): void{
+    let userInput=this.mpTeamsForm.value;
+
+    if(this.teamExists(userInput)){
+      this.inputsValid2=false;
+    }
+    else{
+      this.inputsValid2=true;
+      console.log(this.mpTeams)
+      console.log(this.mpTeams.length)
+
+      userInput.teamId= this.mpTeams.length+1001;
+      userInput.points=0;
+      userInput.wins=0;
+      userInput.losses=0;
+      userInput.roundsWon=0;
+      userInput.roundsLost=0;
+      userInput.disqualified=false;
+
+      this.databaseService.addMpTeam(userInput)
+      this.mpTeamsForm.reset();
+    }
+
+    
+  }
+
+  getTeams(){
+    this.databaseService.getMpTeams().snapshotChanges().forEach(teamsSnapshot=>{
+      this.mpTeams=[]
+       teamsSnapshot.forEach(teamSnapshot=>{
+          let team=<IMPTeam>teamSnapshot.payload.toJSON();
+          console.log(team)
+         if(teamSnapshot.key)
+          team['$key']= teamSnapshot.key;
+          this.mpTeams.push(team as IMPTeam);
           
 
         });
     });
   }
+
+  
+
+  teamExists(o: IMPTeam): boolean{   
+    for(var team of this.mpTeams){
+      if(team.teamName.toLowerCase()==o.teamName.toLowerCase()){
+        return true;
+      }
+    }
+    return false;
+  }
+
+
 
 
 
