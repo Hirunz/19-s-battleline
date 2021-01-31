@@ -47,6 +47,21 @@ import { BrLoginComponent } from './components/admin-view/br/br-login/br-login.c
 import { BrScoresComponent } from './components/admin-view/br/br-scores/br-scores.component';
 
 
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHPTXGae_LQmA0bT8FKnnUG9Jhb2uHZMs",
+  authDomain: "battleline-19.firebaseapp.com",
+  databaseURL: "https://battleline-19-default-rtdb.firebaseio.com",
+  projectId: "battleline-19",
+  storageBucket: "battleline-19.appspot.com",
+  messagingSenderId: "324568409959",
+  appId: "1:324568409959:web:39f9ef876c9b85ed4bf1c2"
+};
+
+
 
 @NgModule({
   declarations: [
@@ -64,9 +79,14 @@ import { BrScoresComponent } from './components/admin-view/br/br-scores/br-score
   imports: [
     BrowserModule,
     AppRoutingModule,
+
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+
 
     MatButtonModule,
     MatCardModule,
@@ -107,3 +127,5 @@ import { BrScoresComponent } from './components/admin-view/br/br-scores/br-score
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
