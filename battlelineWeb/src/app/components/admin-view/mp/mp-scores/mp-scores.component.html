@@ -1,6 +1,6 @@
 <div class = "forms">
     <div class="mpMatch">
-        <form [formGroup]="mpMatchForm" (ngSubmit)="onMatchSubmit()">
+        <form [formGroup]="mpMatchForm" (ngSubmit)="onMatchSubmit()" >
         <mat-card >
             
             <mat-card-header>
@@ -36,10 +36,14 @@
                 <mat-form-field>
                     <input formControlName="team2Rounds" type="number"  matInput placeholder="Team 2 Rounds">
                 </mat-form-field>
+                <br>
+            <mat-error *ngIf="verifyErr" >
+                    ERROR => Please check details and try again.
+            </mat-error>
             
             </mat-card-content>
             <mat-card-actions align="end">
-                <button *ngIf="verify" type="submit" mat-raised-button color="primary">Add Match</button>
+                <button *ngIf="verify" type="submit" mat-raised-button color="primary" >Add Match</button>
                 <button *ngIf="!verify" type="button" mat-raised-button color="primary" (click)="onVerify()">Verify</button>
             </mat-card-actions>
         </mat-card>

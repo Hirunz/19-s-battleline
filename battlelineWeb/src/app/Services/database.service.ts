@@ -5,6 +5,7 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { IMpMatch } from '../Interfaces/IMpMatch';
 import { IMPTeam } from '../Interfaces/IMPTeam';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,7 +34,10 @@ addMpMatch(match: IMpMatch){
 
 updateMpMatch(match: IMpMatch){
   let $key=match.$key;
+  delete match.$key
+  if($key != undefined){
   this.mpMatchesList.update($key, match);
+  }
 }
 
 deleteMpMatch($key: string){
@@ -52,9 +56,12 @@ addMpTeam(team: IMPTeam){
   this.mpTeamsList.push(team);
 }
 
-updateMpTeam(team: IMpMatch){
+updateMpTeam(team: IMPTeam){
   let $key=team.$key;
+  delete team.$key
+  if($key != undefined){
   this.mpTeamsList.update($key, team);
+  }
 }
 
 deleteMpTeam($key: string){

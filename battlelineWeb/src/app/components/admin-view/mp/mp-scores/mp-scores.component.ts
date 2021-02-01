@@ -15,9 +15,17 @@ import { DatabaseService } from 'src/app/Services/database.service';
   styleUrls: ['./mp-scores.component.css']
 })
 export class MpScoresComponent implements OnInit {
+
+
+  public winpoints: number=3;
+  public drawpoints: number=1;
+
+
   public inputsValid2=true;
   public inputsValid1=true;
   public verify=false;
+  public verifyErr=false;
+  public disableForm=false;
 
   public mpMatchForm: FormGroup;
   public mpTeamsForm: FormGroup;
@@ -25,8 +33,9 @@ export class MpScoresComponent implements OnInit {
    public mpMatches: IMpMatch[]=[];
   public  mpTeams: IMPTeam[]=[];
 
-  public team1Name: string=""
-  public team2Name: string=""
+  public team1Name: string="";
+  public team2Name: string="";
+
 
   constructor(private databaseService: DatabaseService) {
     this.getMatches();
@@ -51,16 +60,60 @@ export class MpScoresComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  
     
   }
 
 
   async onMatchSubmit(){
+    console.log("submit button working")
     let userInput=this.mpMatchForm.value;
+    console.log(userInput)
 
-    // if()
-    await this.databaseService.addMpMatch(this.mpMatchForm.value)
+    let team1=this.getTeam1(<number> userInput.team1);
+    let team2=this.getTeam1(<number>userInput.team2);
+    
+
+    if(team1 !=undefined && team2!=undefined){
+      console.log("not undefined")
+    if(userInput.team1Rounds > userInput.team2Rounds){
+      team1.roundsWon+=userInput.team1Rounds;
+      team1.roundsLost+=userInput.team2Rounds;
+      team1.wins+=1;
+      team1.points+=this.winpoints;
+
+      team2.roundsWon+=userInput.team2Rounds;
+      team2.roundsLost+=userInput.team1Rounds;
+      team2.losses+=1;
+
+    }else if(userInput.team2Rounds > userInput.team1Rounds){
+      team2.roundsWon+=userInput.team2Rounds;
+      team2.roundsLost+=userInput.team1Rounds;
+      team2.wins+=1;
+      team2.points+=this.winpoints;
+
+      team1.roundsWon+=userInput.team1Rounds;
+      team1.roundsLost+=userInput.team2Rounds;
+      team1.losses+=1;
+
+    }else{
+      team1.roundsWon+=userInput.team1Rounds;
+      team1.roundsLost+=userInput.team2Rounds;
+      team1.points+=this.drawpoints;
+
+      team2.roundsWon+=userInput.team2Rounds;
+      team2.roundsLost+=userInput.team1Rounds;
+      team2.points+=this.drawpoints;
+    }
+    console.log(team1);
+    
+    console.log(team2);
+    this.databaseService.updateMpTeam(team1);
+    this.databaseService.updateMpTeam(team2);
+    this.verify=false;
+    this.verifyErr=false;
     this.mpMatchForm.reset();
+  }
   }
 
   onVerify(){
@@ -74,11 +127,24 @@ export class MpScoresComponent implements OnInit {
       
     
       if(this.team1Name !="Team Not Found" && this.team2Name !="Team Not Found"){
-        this.verify=true;
+        if(userInput.team1Rounds<0 || userInput.team1Rounds>5
+          || userInput.team2Rounds<0 ||userInput.team2Rounds>5){
+            this.verify=false;
+            this.verifyErr=true;
+          }
+          else{
+            this.verify=true;
+            this.verifyErr=false;
+            this.mpMatchForm.disable();
+            
+          }
       }
       else{
         this.verify=false;
+        this.verifyErr=true;
       }
+
+    
     
   }
 
@@ -148,14 +214,13 @@ export class MpScoresComponent implements OnInit {
     return "Team Not Found";
   }
 
-  teamExists2(id: number){
-    for(var team of this.mpTeams){
-      if(team.teamId==id){
-        return true;
-      }
-    }
-    return false;
+  getTeam1(id: number){
+   
+    return this.mpTeams.find(i=> i.teamId==id)
+   
   }
+
+
 
   teamExists(o: IMPTeam): boolean{   
     for(var team of this.mpTeams){

@@ -1,7 +1,7 @@
 import { IMPTeam } from "./IMPTeam";
 
 export interface IMpMatch {
-    $key: string,
+    $key?: string,
     team1: IMPTeam,
     team2: IMPTeam,
     team1Rounds: number,
