@@ -1,16 +1,24 @@
-<div class = "forms">
+<div class = "root">
     <div class="mpMatch">
         <form [formGroup]="mpMatchForm" (ngSubmit)="onMatchSubmit()" >
         <mat-card >
             
             <mat-card-header>
-                <mat-card-title>Add MP Match</mat-card-title>
+                <mat-card-title><h1>ADD MP MATCH</h1></mat-card-title>
             </mat-card-header>
             <mat-card-content fxLayout="column">
                 <section>
+                    <label><h2>Team 1 Details</h2></label>
+                    <div class="content">
                     <mat-form-field>
                         <input formControlName="team1" type="text"matInput placeholder="Team 1 ID">
                     </mat-form-field>
+                    <br>
+                    <mat-form-field>
+                        <input formControlName="team1Rounds" type="number"matInput placeholder="Team 1 Rounds">
+                    </mat-form-field>
+    
+                   
                     
                     <p>                  
                         Team 1 Name:  &nbsp; {{team1Name}}
@@ -19,37 +27,36 @@
                     
                     <mat-checkbox  labelPosition="before" (change)="onDisqualified1($event.checked)">Team 1 Disqualified 
                     </mat-checkbox>
+                </div>
                 </section>
-                
+                <br><br>
                
             
                 <section>
+                    <label><h2>Team 2 Details</h2></label>
+                    <div class="content">
                     <mat-form-field>
                         <input formControlName="team2" type="text"  matInput placeholder="Team 2 ID">
                     </mat-form-field>
+                    <br>
+                    <mat-form-field>
+                        <input formControlName="team2Rounds" type="number"  matInput placeholder="Team 2 Rounds">
+                    </mat-form-field>
                     <p>                  
-                        &nbsp;Team 2 Name:  &nbsp; {{team2Name}}
+                        Team 2 Name:  &nbsp; {{team2Name}}
                     </p>
     
                    
                     <mat-checkbox  labelPosition="before" (change)="onDisqualified2($event.checked)">Team 2 Disqualified 
                     </mat-checkbox>
                     <br>
-                </section>
-                
+                    </div>
 
-                <section>
-                    <mat-form-field>
-                        <input formControlName="team1Rounds" type="number"matInput placeholder="Team 1 Rounds">
-                    </mat-form-field>
-    
-                    <br>
                     
-    
-                    <mat-form-field>
-                        <input formControlName="team2Rounds" type="number"  matInput placeholder="Team 2 Rounds">
-                    </mat-form-field>
                 </section>
+            
+
+                
                 
                 <br>
             <mat-error *ngIf="verifyErr" >
@@ -58,7 +65,7 @@
             
             </mat-card-content>
             <mat-card-actions align="end">
-                <button *ngIf="verify" type="submit" mat-raised-button color="primary" >Add Match</button>
+                <button *ngIf="verify" type="submit" id="btn" mat-raised-button color="#3f0081" >Add Match</button>
                 <button *ngIf="!verify" type="button" mat-raised-button color="primary" (click)="onVerify()">Verify</button>
             </mat-card-actions>
         </mat-card>
@@ -72,8 +79,9 @@
         <mat-card >
             
             <mat-card-header>
-                <mat-card-title>Add MP Team</mat-card-title>
+                <mat-card-title>ADD MP TEAM</mat-card-title>
             </mat-card-header>
+            <div class="cotent">
             <mat-card-content fxLayout="column">
                 <mat-form-field>
                     <input formControlName="teamName" type="text"  matInput placeholder="Team Name">
@@ -84,6 +92,7 @@
                 </mat-error>
             
             </mat-card-content>
+        </div>
             <mat-card-actions align="end">
                 <button  type="submit" mat-raised-button color="primary">Add Team</button>
                
@@ -93,11 +102,7 @@
     </form>
     </div>
 </div>
-<!-- <div >
-   <pre>
-       {{mpMatches | json}}
-   </pre>
-   <button  mat-raised-button color="primary" type="button"(click)="getMatches()">Get matches</button>
 
-</div> -->
+
+
 
