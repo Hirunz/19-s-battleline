@@ -10,7 +10,7 @@ import { DatabaseService } from 'src/app/Services/database.service';
 export class BrPageComponent implements OnInit {
 
   public brPlayers: IBrPlayer[];
-  public columns: string[]=["playerId","playerName","rank","kills","points"];
+  public columns: string[]=["playerId","playerName","kills","points"];
 
   constructor(private databaseService: DatabaseService) { 
     this.brPlayers=[];

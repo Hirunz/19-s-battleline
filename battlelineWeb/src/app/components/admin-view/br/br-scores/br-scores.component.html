@@ -1,12 +1,11 @@
 <div>
-    <form [formGroup]="brPlayersForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="brPlayersForm" (ngSubmit)="onSubmit()" class="brForm">
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Add BR Player</mat-card-title>
+            <mat-card-title>Add/Update BR Player</mat-card-title>
         </mat-card-header>
         
-        <mat-card-content fxLayout="column">
-            <section>
+        <mat-card-content fxLayout="column" class="formContent">
             <!-- <mat-form-field>
                 <input formControlName="playerId" type="text" matInput placeholder="Player ID">
             </mat-form-field>
@@ -18,55 +17,54 @@
             </mat-form-field>
             
             <br>
+
+            <p>
+                Player Name : {{playerName}}
+            </p>
             
             <mat-form-field>
                 <input formControlName="rank" type="number"matInput placeholder="Rank">
             </mat-form-field>
             
             <br>
+
+            <p>
+                Rank : {{playerRank}}
+            </p>
             
             <mat-form-field>
                 <input formControlName="kills" type="number"  matInput placeholder="Num of kills">
             </mat-form-field>
             
             <br>
+            <br>
 
-            <mat-form-field>
-                <input formControlName="disqualified" type="number"  matInput placeholder="Disqualified - 1, Qualified - 0">
-            </mat-form-field>
+            <p>
+                Number of Kills : {{kills}}
+            </p>
+
+            <mat-checkbox  labelPosition="before" (change)="onDisqualified($event.checked)">
+                Disqualified 
+            </mat-checkbox>
 
             <br>
-            <mat-error *ngIf="!playerInputValidity" >
-                ERROR => Player already exists.
-            </mat-error>
-
             <br>
-            <mat-error *ngIf="!disqualifiedInputValidity" >
-                ERROR => Disqualified Input can only be 0 or 1!
-            </mat-error>
             
-            <br>
-        </section>
+            <p>
+                Disqualified : {{disqualified}}
+            </p>
             
-            
-            <!-- <mat-form-field> -->
-                <!-- <mat-select [(ngModel)]="selectedValue" name="food">
-                  <mat-option *ngFor="let disqualifiedValue of disqualified" [value]="disqualifiedValue">
-                    {{disqualifiedValue}}
-                  </mat-option>
-                </mat-select> -->
+            <h3>
+                Points : {{points}}
+            </h3>
 
-                <!-- <mat-checkbox [(ngModel)]="checked">Checked</mat-checkbox> -->
-            <!-- </mat-form-field> -->
-            <!-- <section>
-                <mat-checkbox class="example-margin" [(ngModel)]="checked">Disqualified</mat-checkbox>
-    
-            </section> -->
         </mat-card-content>
         
-        <mat-card-actions align="end">
-            <button type="submit" mat-raised-button color="primary">Add Player</button>
+        <mat-card-actions align="end" >
+            <button type="submit" *ngIf="addVisibility" mat-raised-button color="primary" (click)="onSubmit('addPlayer')">Add Player</button>
+            <button type="submit" *ngIf="verifyVisibility" mat-raised-button color="primary" (click)="onSubmit('verify')">Verify</button>
         </mat-card-actions>
+        
     </mat-card>
     </form>
 </div>

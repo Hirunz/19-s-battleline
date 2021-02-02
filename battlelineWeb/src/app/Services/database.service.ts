@@ -81,7 +81,9 @@ addBrPlayer(player: IBrPlayer){
 
 updateBrPlayer(player: IBrPlayer){
   let $key=player.$key;
-  this.brPlayersList.update($key, player);
+  delete player.$key
+  if($key != undefined)
+    this.brPlayersList.update($key, player);
 }
 
 deleteBrPlayer($key: string){

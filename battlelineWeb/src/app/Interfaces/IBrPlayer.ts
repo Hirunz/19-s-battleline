@@ -1,9 +1,9 @@
 export interface IBrPlayer {
-    $key: string,
+    $key?: string,
     playerId: number,
     playerName: string,
-    rank: number,
+    rank?: number,
     kills: number,
-    points?: number,
+    points: number,
     disqualified: boolean
 }
