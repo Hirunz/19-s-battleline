@@ -20,6 +20,10 @@ export class MpScoresComponent implements OnInit {
   public winpoints: number=3;
   public drawpoints: number=1;
 
+  public team1Disqualified:boolean=false;
+  public team2Disqualified:boolean=false;
+  
+
 
   public inputsValid2=true;
   public inputsValid1=true;
@@ -66,16 +70,21 @@ export class MpScoresComponent implements OnInit {
 
 
   async onMatchSubmit(){
-    console.log("submit button working")
+    
     let userInput=this.mpMatchForm.value;
-    console.log(userInput)
+   
 
     let team1=this.getTeam1(<number> userInput.team1);
     let team2=this.getTeam1(<number>userInput.team2);
-    
 
     if(team1 !=undefined && team2!=undefined){
-      console.log("not undefined")
+      if(this.team1Disqualified){
+        team1.disqualified=true;
+      }
+      if(this.team2Disqualified){
+        team2.disqualified=true;
+      }
+      
     if(userInput.team1Rounds > userInput.team2Rounds){
       team1.roundsWon+=userInput.team1Rounds;
       team1.roundsLost+=userInput.team2Rounds;
@@ -112,8 +121,28 @@ export class MpScoresComponent implements OnInit {
     this.databaseService.updateMpTeam(team2);
     this.verify=false;
     this.verifyErr=false;
+    this.team1Disqualified=false;
+    this.team2Disqualified=false;
+    this.mpMatchForm.enable();
     this.mpMatchForm.reset();
   }
+  }
+
+  onDisqualified1(isChecked: boolean){
+   
+    if(isChecked){
+      this.team1Disqualified=true;
+    }else{
+      this.team1Disqualified=false;
+    }
+  }
+
+  onDisqualified2(isChecked: boolean){
+    if(isChecked){
+      this.team1Disqualified=true;
+    }else{
+      this.team1Disqualified=false;
+    }
   }
 
   onVerify(){
@@ -122,8 +151,15 @@ export class MpScoresComponent implements OnInit {
 
       this.team1Name=this.getTeam(userInput.team1);
       this.team2Name=this.getTeam(userInput.team2);
-      console.log(this.team1Name)
-      console.log(this.team2Name)
+      
+      
+      // if(userInput.team1Rounds != Number || userInput.team2Rounds !=Number){
+      //   this.verify=false;
+      //   this.verifyErr=true;
+      //   return;
+      // }
+    
+        console.log(this.team1Disqualified)
       
     
       if(this.team1Name !="Team Not Found" && this.team2Name !="Team Not Found"){

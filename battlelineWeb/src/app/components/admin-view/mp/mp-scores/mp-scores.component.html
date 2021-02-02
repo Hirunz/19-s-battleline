@@ -7,35 +7,50 @@
                 <mat-card-title>Add MP Match</mat-card-title>
             </mat-card-header>
             <mat-card-content fxLayout="column">
-                <mat-form-field>
-                    <input formControlName="team1" type="text"matInput placeholder="Team 1 ID">
-                </mat-form-field>
+                <section>
+                    <mat-form-field>
+                        <input formControlName="team1" type="text"matInput placeholder="Team 1 ID">
+                    </mat-form-field>
+                    
+                    <p>                  
+                        Team 1 Name:  &nbsp; {{team1Name}}
+                    </p>
+    
+                    
+                    <mat-checkbox  labelPosition="before" (change)="onDisqualified1($event.checked)">Team 1 Disqualified 
+                    </mat-checkbox>
+                </section>
                 
-                <p>                  
-                    Team 1 Name:  &nbsp; {{team1Name}}
-                </p>
                
-                <br>
-
-                <mat-form-field>
-                    <input formControlName="team2" type="text"  matInput placeholder="Team 2 ID">
-                </mat-form-field>
-                <p>                  
-                    &nbsp;Team 2 Name:  &nbsp; {{team2Name}}
-                </p>
-                <br>
-
-
-                <mat-form-field>
-                    <input formControlName="team1Rounds" type="number"matInput placeholder="Team 1 Rounds">
-                </mat-form-field>
-
-                <br>
+            
+                <section>
+                    <mat-form-field>
+                        <input formControlName="team2" type="text"  matInput placeholder="Team 2 ID">
+                    </mat-form-field>
+                    <p>                  
+                        &nbsp;Team 2 Name:  &nbsp; {{team2Name}}
+                    </p>
+    
+                   
+                    <mat-checkbox  labelPosition="before" (change)="onDisqualified2($event.checked)">Team 2 Disqualified 
+                    </mat-checkbox>
+                    <br>
+                </section>
                 
 
-                <mat-form-field>
-                    <input formControlName="team2Rounds" type="number"  matInput placeholder="Team 2 Rounds">
-                </mat-form-field>
+                <section>
+                    <mat-form-field>
+                        <input formControlName="team1Rounds" type="number"matInput placeholder="Team 1 Rounds">
+                    </mat-form-field>
+    
+                    <br>
+                    
+    
+                    <mat-form-field>
+                        <input formControlName="team2Rounds" type="number"  matInput placeholder="Team 2 Rounds">
+                    </mat-form-field>
+                </section>
+                
                 <br>
             <mat-error *ngIf="verifyErr" >
                     ERROR => Please check details and try again.
@@ -85,3 +100,4 @@
    <button  mat-raised-button color="primary" type="button"(click)="getMatches()">Get matches</button>
 
 </div> -->
+
