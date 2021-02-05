@@ -12,6 +12,7 @@
   }
 
 .brForm{
+  min-width: 300px;
   width: 50%;
   margin: auto;
   margin-top: 100px;
@@ -19,4 +20,8 @@
 
 .formContent{
   padding-left: 5%;
+}
+
+#verify-btn{
+  background-color: red;
 }

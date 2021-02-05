@@ -62,7 +62,7 @@
         
         <mat-card-actions align="end" >
             <button type="submit" *ngIf="addVisibility" mat-raised-button color="primary" (click)="onSubmit('addPlayer')">Add Player</button>
-            <button type="submit" *ngIf="verifyVisibility" mat-raised-button color="primary" (click)="onSubmit('verify')">Verify</button>
+            <button type="submit" id='verify-btn' *ngIf="verifyVisibility" mat-raised-button color="primary" (click)="onSubmit('verify')">Verify</button>
         </mat-card-actions>
         
     </mat-card>
