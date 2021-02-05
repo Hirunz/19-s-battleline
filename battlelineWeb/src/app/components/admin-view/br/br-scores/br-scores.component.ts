@@ -100,6 +100,7 @@ export class BrScoresComponent implements OnInit {
       this.playerName = userInput.playerName;
       this.playerRank = userInput.rank;
       this.kills = userInput.kills;
+      this.brPlayersForm.disable();
       
       // verify button action
       if (buttonType == "verify"){
@@ -120,6 +121,8 @@ export class BrScoresComponent implements OnInit {
         this.kills = 0;
         this.points = 0;
         this.disqualified = false;
+        this.brPlayersForm.enable();
+
       }
     } else {
       this.showEmptyValueError = true;

@@ -122,7 +122,7 @@ export class MpScoresComponent implements OnInit {
         this.verifyErr=false;
         this.team1Disqualified=false;
         this.team2Disqualified=false;
-        // this.mpMatchForm.enable();
+        this.mpMatchForm.enable();
         this.mpMatchForm.reset();
       }
 
@@ -172,7 +172,7 @@ export class MpScoresComponent implements OnInit {
           else{
             this.verify=true;
             this.verifyErr=false;
-            // this.mpMatchForm.disable();
+            this.mpMatchForm.disable();
             
           }
       }

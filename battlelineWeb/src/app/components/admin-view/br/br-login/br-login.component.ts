@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class BrLoginComponent implements OnInit {
   public username="sysadmin";
-  public password="FH5;b^Y5j{-g`]'B";
+  public password="s;2WpX]hLRtx_]z";
   public credentialsValid=false;
   public showContent=false;
 
