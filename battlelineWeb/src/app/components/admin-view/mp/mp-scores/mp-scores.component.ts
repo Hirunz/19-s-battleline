@@ -226,6 +226,9 @@ export class MpScoresComponent implements OnInit {
    
   }
 
+
+  
+
   async getMatches(){
     await this.databaseService.getMpMatches().snapshotChanges().forEach(matchesSnapshot=>{
       this.mpMatches=[]

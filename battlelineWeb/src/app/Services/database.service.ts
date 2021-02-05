@@ -48,7 +48,7 @@ deleteMpMatch($key: string){
 
 //MP - Teams
 
-getMpTeams(): AngularFireList<IMPTeam>{
+getMpTeams(){
   return this.mpTeamsList;
 }
 
