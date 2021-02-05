@@ -59,9 +59,13 @@
                 
                 
                 <br>
-            <mat-error *ngIf="verifyErr" >
-                    ERROR => Please check details and try again.
-            </mat-error>
+                <mat-error *ngIf="verifyErr" >
+                        ERROR => Please check details and try again.
+                </mat-error>
+
+                <mat-error *ngIf="showEmptyValueError" >
+                    Fields can not be EMPTY !
+                </mat-error>
             
             </mat-card-content>
             <mat-card-actions align="end">
@@ -90,7 +94,11 @@
                 <mat-error *ngIf="!inputsValid2" >
                     ERROR => Team already exists.
                 </mat-error>
-            
+                
+                <mat-error *ngIf="showEmptyValueError2" >
+                    Fields can not be EMPTY !
+                </mat-error>
+
             </mat-card-content>
         </div>
             <mat-card-actions align="end">

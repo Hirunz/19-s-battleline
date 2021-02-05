@@ -30,6 +30,8 @@ export class MpScoresComponent implements OnInit {
   public verify=false;
   public verifyErr=false;
   public disableForm=false;
+  public showEmptyValueError=false;
+  public showEmptyValueError2=false;
 
   public mpMatchForm: FormGroup;
   public mpTeamsForm: FormGroup;
@@ -63,10 +65,7 @@ export class MpScoresComponent implements OnInit {
 
    }
 
-  ngOnInit(): void {
-  
-    
-  }
+  ngOnInit(): void {}
 
 
   async onMatchSubmit(){
@@ -77,55 +76,56 @@ export class MpScoresComponent implements OnInit {
     let team1=this.getTeam1(<number> userInput.team1);
     let team2=this.getTeam1(<number>userInput.team2);
 
-    if(team1 !=undefined && team2!=undefined){
-      if(this.team1Disqualified){
-        team1.disqualified=true;
+      if(team1 !=undefined && team2!=undefined){
+        if(this.team1Disqualified){
+          team1.disqualified=true;
+        }
+        if(this.team2Disqualified){
+          team2.disqualified=true;
+        }
+        
+        if(userInput.team1Rounds > userInput.team2Rounds){
+          team1.roundsWon+=userInput.team1Rounds;
+          team1.roundsLost+=userInput.team2Rounds;
+          team1.wins+=1;
+          team1.points+=this.winpoints;
+
+          team2.roundsWon+=userInput.team2Rounds;
+          team2.roundsLost+=userInput.team1Rounds;
+          team2.losses+=1;
+
+        }else if(userInput.team2Rounds > userInput.team1Rounds){
+          team2.roundsWon+=userInput.team2Rounds;
+          team2.roundsLost+=userInput.team1Rounds;
+          team2.wins+=1;
+          team2.points+=this.winpoints;
+
+          team1.roundsWon+=userInput.team1Rounds;
+          team1.roundsLost+=userInput.team2Rounds;
+          team1.losses+=1;
+
+        }else{
+          team1.roundsWon+=userInput.team1Rounds;
+          team1.roundsLost+=userInput.team2Rounds;
+          team1.points+=this.drawpoints;
+
+          team2.roundsWon+=userInput.team2Rounds;
+          team2.roundsLost+=userInput.team1Rounds;
+          team2.points+=this.drawpoints;
+        }
+        console.log(team1);
+        
+        console.log(team2);
+        this.databaseService.updateMpTeam(team1);
+        this.databaseService.updateMpTeam(team2);
+        this.verify=false;
+        this.verifyErr=false;
+        this.team1Disqualified=false;
+        this.team2Disqualified=false;
+        // this.mpMatchForm.enable();
+        this.mpMatchForm.reset();
       }
-      if(this.team2Disqualified){
-        team2.disqualified=true;
-      }
-      
-    if(userInput.team1Rounds > userInput.team2Rounds){
-      team1.roundsWon+=userInput.team1Rounds;
-      team1.roundsLost+=userInput.team2Rounds;
-      team1.wins+=1;
-      team1.points+=this.winpoints;
 
-      team2.roundsWon+=userInput.team2Rounds;
-      team2.roundsLost+=userInput.team1Rounds;
-      team2.losses+=1;
-
-    }else if(userInput.team2Rounds > userInput.team1Rounds){
-      team2.roundsWon+=userInput.team2Rounds;
-      team2.roundsLost+=userInput.team1Rounds;
-      team2.wins+=1;
-      team2.points+=this.winpoints;
-
-      team1.roundsWon+=userInput.team1Rounds;
-      team1.roundsLost+=userInput.team2Rounds;
-      team1.losses+=1;
-
-    }else{
-      team1.roundsWon+=userInput.team1Rounds;
-      team1.roundsLost+=userInput.team2Rounds;
-      team1.points+=this.drawpoints;
-
-      team2.roundsWon+=userInput.team2Rounds;
-      team2.roundsLost+=userInput.team1Rounds;
-      team2.points+=this.drawpoints;
-    }
-    console.log(team1);
-    
-    console.log(team2);
-    this.databaseService.updateMpTeam(team1);
-    this.databaseService.updateMpTeam(team2);
-    this.verify=false;
-    this.verifyErr=false;
-    this.team1Disqualified=false;
-    this.team2Disqualified=false;
-    this.mpMatchForm.enable();
-    this.mpMatchForm.reset();
-  }
   }
 
   onDisqualified1(isChecked: boolean){
@@ -161,7 +161,8 @@ export class MpScoresComponent implements OnInit {
     
         console.log(this.team1Disqualified)
       
-    
+    if(!this.validateForm()){
+      this.showEmptyValueError = false;
       if(this.team1Name !="Team Not Found" && this.team2Name !="Team Not Found"){
         if(userInput.team1Rounds<0 || userInput.team1Rounds>5
           || userInput.team2Rounds<0 ||userInput.team2Rounds>5){
@@ -171,7 +172,7 @@ export class MpScoresComponent implements OnInit {
           else{
             this.verify=true;
             this.verifyErr=false;
-            this.mpMatchForm.disable();
+            // this.mpMatchForm.disable();
             
           }
       }
@@ -179,7 +180,9 @@ export class MpScoresComponent implements OnInit {
         this.verify=false;
         this.verifyErr=true;
       }
-
+    } else {
+      this.showEmptyValueError = true;
+    }
     
     
   }
@@ -189,25 +192,30 @@ export class MpScoresComponent implements OnInit {
   async onTeamSubmit(){
     let userInput=this.mpTeamsForm.value;
     console.log(userInput.value)
+   
+    if(!this.validateForm2()){
+      this.showEmptyValueError2 = false;
+      if(this.teamExists(userInput)){
+        this.inputsValid2=false;
+      }
+      else{
+        this.inputsValid2=true;
+        console.log(this.mpTeams)
+        console.log(this.mpTeams.length)
 
-    if(this.teamExists(userInput)){
-      this.inputsValid2=false;
-    }
-    else{
-      this.inputsValid2=true;
-      console.log(this.mpTeams)
-      console.log(this.mpTeams.length)
+        userInput.teamId= this.mpTeams.length+1001;
+        userInput.points=0;
+        userInput.wins=0;
+        userInput.losses=0;
+        userInput.roundsWon=0;
+        userInput.roundsLost=0;
+        userInput.disqualified=false;
 
-      userInput.teamId= this.mpTeams.length+1001;
-      userInput.points=0;
-      userInput.wins=0;
-      userInput.losses=0;
-      userInput.roundsWon=0;
-      userInput.roundsLost=0;
-      userInput.disqualified=false;
-
-      this.databaseService.addMpTeam(userInput)
-      this.mpTeamsForm.reset();
+        this.databaseService.addMpTeam(userInput)
+        this.mpTeamsForm.reset();
+      }
+    } else {
+      this.showEmptyValueError2 = true;
     }
   }
 
@@ -271,7 +279,21 @@ export class MpScoresComponent implements OnInit {
   }
 
 
+  private validateForm() : boolean{
+      let userInput=this.mpMatchForm.value;
+      if (userInput.team1Rounds=="" || userInput.team2Rounds==""){
+        return true;
+      }
+      return false;
+    }
 
+  private validateForm2() : boolean{
+      let userInput=this.mpTeamsForm.value;
+      if (userInput.teamName==""){
+        return true;
+      }
+      return false;
+    }
 
 
 

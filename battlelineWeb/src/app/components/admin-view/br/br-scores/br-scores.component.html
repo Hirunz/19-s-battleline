@@ -58,6 +58,10 @@
                 Points : {{points}}
             </h3>
 
+            <mat-error *ngIf="showEmptyValueError" >
+                Fields can not be EMPTY !
+            </mat-error>
+
         </mat-card-content>
         
         <mat-card-actions align="end" >

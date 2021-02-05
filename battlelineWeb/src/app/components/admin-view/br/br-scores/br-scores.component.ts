@@ -23,6 +23,7 @@ export class BrScoresComponent implements OnInit {
   // Component visibilities
   public verifyVisibility=false;
   public addVisibility=true;
+  public showEmptyValueError=false;
   
   public brPlayersForm: FormGroup;
   public team1Disqualified:boolean=false;
@@ -61,62 +62,67 @@ export class BrScoresComponent implements OnInit {
     let userInput=this.brPlayersForm.value;
     
     // add player button action
-    if(buttonType=="addPlayer"){
-      
-      var playerArrIndex = this.playerIndex(userInput);
-      
-      if(playerArrIndex == -1){
-        this.playerExists = false;
+    if(!this.validateForm()) {
+      this.showEmptyValueError = false;
 
-        //------------------------POINT FORMULA--------------------------------- 
-        this.points = 101-userInput.rank;
-        //----------------------------------------------------------------------
+      if(buttonType=="addPlayer"){
+        var playerArrIndex = this.playerIndex(userInput);
         
-        // auto increment player id and set disqaulifed value
-        userInput.playerId = this.brPlayers.length+1001;
-        userInput.disqualified = this.disqualified;
-        
-      } else {
-        this.playerExists = true;
-        this.player = this.brPlayers[playerArrIndex];
-        //------------------------POINT FORMULA--------------------------------- 
-        this.player.points = this.player.points + (101-userInput.rank);
-        this.points = this.player.points;
-        //----------------------------------------------------------------------
-        this.player.kills = this.player.kills + (userInput.kills);
-        this.player.disqualified = this.disqualified;
-      }
-      // display verify button
-      this.verifyVisibility = true;
-      this.addVisibility = false;
-    }
+        if(playerArrIndex == -1){
+          this.playerExists = false;
 
-    userInput.points = this.points;
-
-    // set text values to confirm
-    this.playerName = userInput.playerName;
-    this.playerRank = userInput.rank;
-    this.kills = userInput.kills;
-    
-    // verify button action
-    if (buttonType == "verify"){
-      
-      if(this.playerExists){
-        console.log(this.points)
-        this.databaseService.updateBrPlayer(this.player);
-      } else {
-        this.databaseService.addBrPlayer(userInput);
+          //------------------------POINT FORMULA--------------------------------- 
+          this.points = 101-userInput.rank;
+          //----------------------------------------------------------------------
+          
+          // auto increment player id and set disqaulifed value
+          userInput.playerId = this.brPlayers.length+1001;
+          userInput.disqualified = this.disqualified;
+          
+        } else {
+          this.playerExists = true;
+          this.player = this.brPlayers[playerArrIndex];
+          //------------------------POINT FORMULA--------------------------------- 
+          this.player.points = this.player.points + (101-userInput.rank);
+          this.points = this.player.points;
+          //----------------------------------------------------------------------
+          this.player.kills = this.player.kills + (userInput.kills);
+          this.player.disqualified = this.disqualified;
+        }
+        // display verify button
+        this.verifyVisibility = true;
+        this.addVisibility = false;
       }
 
-      this.brPlayersForm.reset();
-      this.verifyVisibility = false;
-      this.addVisibility = true;
+      userInput.points = this.points;
+
       // set text values to confirm
-      this.playerName = "";
-      this.playerRank = 0;
-      this.kills = 0;
-      this.points = 0;
-      this.disqualified = false;
+      this.playerName = userInput.playerName;
+      this.playerRank = userInput.rank;
+      this.kills = userInput.kills;
+      
+      // verify button action
+      if (buttonType == "verify"){
+        
+        if(this.playerExists){
+          console.log(this.points)
+          this.databaseService.updateBrPlayer(this.player);
+        } else {
+          this.databaseService.addBrPlayer(userInput);
+        }
+
+        this.brPlayersForm.reset();
+        this.verifyVisibility = false;
+        this.addVisibility = true;
+        // set text values to confirm
+        this.playerName = "";
+        this.playerRank = 0;
+        this.kills = 0;
+        this.points = 0;
+        this.disqualified = false;
+      }
+    } else {
+      this.showEmptyValueError = true;
     }
   }
 
@@ -144,5 +150,13 @@ export class BrScoresComponent implements OnInit {
       }
     }
     return -1;
+  }
+
+  private validateForm() : boolean{
+    let userInput=this.brPlayersForm.value;
+    if (userInput.playerName=="" || userInput.rank=="" || userInput.kills==""){
+      return true;
+    }
+    return false;
   }
 }

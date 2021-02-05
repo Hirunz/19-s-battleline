@@ -5,11 +5,11 @@
         <app-header gameMode="Battle Royale"></app-header>
 
         <div class="table">
-            <table mat-table [dataSource]="brPlayers" class="mat-elevation-z8">
+            <table mat-table matTableExporter [dataSource]="tableData" matSort class="mat-elevation-z8">
               
                 <!-- ID Column -->
                 <ng-container matColumnDef="playerId">
-                  <th mat-header-cell *matHeaderCellDef> Player ID </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Player ID </th>
                   <td mat-cell *matCellDef="let player">
                     <div *ngIf="!isDisqualified(player.disqualified)" >
                     
@@ -23,7 +23,7 @@
               
                 <!-- Name Column -->
                 <ng-container matColumnDef="playerName">
-                  <th mat-header-cell *matHeaderCellDef>Player Name </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Player Name </th>
                   <td mat-cell *matCellDef="let player"> 
                     <div *ngIf="!isDisqualified(player.disqualified)" >
                     
@@ -37,7 +37,7 @@
               
                 <!-- Points Column -->
                 <ng-container matColumnDef="points">
-                  <th mat-header-cell *matHeaderCellDef> Points </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Points </th>
                   <td mat-cell *matCellDef="let player"> 
                     <div *ngIf="!isDisqualified(player.disqualified)" >
                     
@@ -50,7 +50,7 @@
         
                  <!-- Kills Column -->
                 <ng-container matColumnDef="kills">
-                    <th mat-header-cell *matHeaderCellDef> Kills </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Kills </th>
                     <td mat-cell *matCellDef="let player">
                       <div *ngIf="!isDisqualified(player.disqualified)" >
                     
