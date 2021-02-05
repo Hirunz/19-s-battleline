@@ -17,7 +17,7 @@ import { DatabaseService } from 'src/app/Services/database.service';
 export class MpScoresComponent implements OnInit {
 
 
-  public winpoints: number=3;
+  public winpoints: number=2;
   public drawpoints: number=1;
 
   public team1Disqualified:boolean=false;

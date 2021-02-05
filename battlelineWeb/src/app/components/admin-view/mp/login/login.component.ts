@@ -8,8 +8,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public username="admin";
-  public password="admin";
+  public username="sysadmin";
+  public password="s;2WpX]hLRtx_]z";
   public credentialsValid=false;
   public showContent=false;
 
