@@ -1,3 +1,7 @@
+<div *ngIf="showContent">
+    <app-br-page></app-br-page>
+</div>
+
 <div class="login-main" *ngIf="!showContent">
     <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         
@@ -29,5 +33,4 @@
 
 <div *ngIf="showContent">
     <app-br-scores></app-br-scores>
-    <app-br-page></app-br-page>
 </div>

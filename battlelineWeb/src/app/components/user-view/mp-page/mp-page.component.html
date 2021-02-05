@@ -4,47 +4,47 @@
         <app-header gameMode="Multiplayer"></app-header>
 
         <div class="table">
-          <table mat-table [dataSource]="mpTeams" class="mat-elevation-z8">
+          <table mat-table matTableExporter [dataSource]="mpTeams" matSort class="mat-elevation-z8">
             
               <!-- ID Column -->
               <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> Team ID </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Team ID </th>
                 <td mat-cell *matCellDef="let team"> {{team.teamId}} </td>
               </ng-container>
             
               <!-- Name Column -->
               <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>Team Name </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Team Name </th>
                 <td mat-cell *matCellDef="let team"> {{team.teamName}} </td>
               </ng-container>
             
               <!-- Points Column -->
               <ng-container matColumnDef="points">
-                <th mat-header-cell *matHeaderCellDef> Points </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Points </th>
                 <td mat-cell *matCellDef="let team"> {{team.points}} </td>
               </ng-container>
             
               <!-- wins Column -->
               <ng-container matColumnDef="wins">
-                <th mat-header-cell *matHeaderCellDef> Wins </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Wins </th>
                 <td mat-cell *matCellDef="let team"> {{team.wins}} </td>
               </ng-container>
       
                <!-- losses Column -->
                <ng-container matColumnDef="losses">
-                  <th mat-header-cell *matHeaderCellDef> Losses </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Losses </th>
                   <td mat-cell *matCellDef="let team"> {{team.losses}} </td>
                 </ng-container>
       
                  <!-- rounds won Column -->
               <ng-container matColumnDef="roundsWon">
-                  <th mat-header-cell *matHeaderCellDef> Rounds Won </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Rounds Won </th>
                   <td mat-cell *matCellDef="let team"> {{team.roundsWon}} </td>
                 </ng-container>
       
                  <!-- rounds lost Column -->
               <ng-container matColumnDef="roundsLost">
-                  <th mat-header-cell *matHeaderCellDef> Rounds Lost </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Rounds Lost </th>
                   <td mat-cell *matCellDef="let team"> {{team.roundsLost}} </td>
                 </ng-container>
             

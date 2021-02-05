@@ -1,3 +1,7 @@
+<div *ngIf="showContent">
+    <app-mp-page></app-mp-page>
+</div>
+
 <div class="login-main" *ngIf="!showContent">
     <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <mat-card class="login-mat" >
@@ -27,6 +31,4 @@
 
 <div *ngIf="showContent">
     <app-mp-scores></app-mp-scores>
-    <app-mp-page></app-mp-page>
 </div>
-

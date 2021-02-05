@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMpMatch } from 'src/app/Interfaces/IMpMatch';
 import { IMPTeam } from 'src/app/Interfaces/IMPTeam';
 import { DatabaseService } from 'src/app/Services/database.service';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-mp-page',
@@ -10,16 +12,22 @@ import { DatabaseService } from 'src/app/Services/database.service';
 })
 export class MpPageComponent implements OnInit {
 
-  public mpTeams: IMPTeam[];
+  public mpTeams!: IMPTeam[];
   public columns: string[]=["id","name","points","wins","losses","roundsWon","roundsLost"];
+  tableData = new MatTableDataSource(this.mpTeams);
 
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
   
   constructor(private databaseService: DatabaseService) {
     this.mpTeams=[];
     this.getTeams();
    }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
+    this.tableData.sort=this.sort;
+    this.getTeams();
+    // console.log(this.tableData.data)
   }
 
   getTeams(){
@@ -27,14 +35,18 @@ export class MpPageComponent implements OnInit {
       this.mpTeams=[]
        teamsSnapshot.forEach(teamSnapshot=>{
           let team=<IMPTeam>teamSnapshot.payload.toJSON();
-          console.log(team)
-         if(teamSnapshot.key)
+          // console.log(team)
+        if(teamSnapshot.key){
           team['$key']= teamSnapshot.key;
           this.mpTeams.push(team as IMPTeam);
-          
-
-        });
+          const data = this.mpTeams;
+          this.tableData.data = data;
+          // console.log("Test 0 " + this.tableData.data)
+        }
+        // console.log("Test 1 " + this.tableData.data)
+      });
+      console.log("Test 2" + this.tableData.data)
     });
-    // console.log(this.mpTeams)
+    console.log("Test 3" + this.tableData.data)
   }
 }

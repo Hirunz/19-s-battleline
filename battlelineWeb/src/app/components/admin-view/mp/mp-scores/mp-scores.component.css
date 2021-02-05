@@ -1,5 +1,5 @@
 .root{
- margin-top: auto;
+ margin-top: 200px;
  font-family: Roboto, "Helvetica Neue", sans-serif;
   }
 
@@ -35,7 +35,9 @@ box-shadow: 0px 5px 14px 0px rgba(110,97,171,0.61);
 }
 
 @media only screen and (min-width: 300px) {
-
+  .root{
+    margin-top: 200px;
+     }
   .mpMatch{
     margin-top: 50px;
    margin-left: auto;
@@ -58,5 +60,7 @@ box-shadow: 0px 5px 14px 0px rgba(110,97,171,0.61);
 
 
 @media only screen and (min-width: 700px) {
-  
+  .root{
+    margin-top: 200px;
+     }
 }
