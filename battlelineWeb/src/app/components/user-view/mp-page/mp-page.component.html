@@ -6,46 +6,105 @@
         <div class="table">
           <table mat-table matTableExporter [dataSource]="tableData" matSort class="mat-elevation-z8">
             
-              <!-- ID Column -->
+              <!-- ID Column --> 
               <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Team ID </th>
                 <td mat-cell *matCellDef="let team"> {{team.teamId}} </td>
+                <td mat-cell *matCellDef="let team"> 
+                  <div *ngIf="!isDisqualified(team.disqualified)" >
+                    
+                    {{team.teamId}}
+                  </div>
+                  <div *ngIf="isDisqualified(team.disqualified)" style="text-decoration: line-through;color: red;">
+                    {{team.teamId}}
+                  </div> 
+                  
+                   </td>
               </ng-container>
             
               <!-- Name Column -->
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Team Name </th>
-                <td mat-cell *matCellDef="let team"> {{team.teamName}} </td>
+                <td mat-cell *matCellDef="let team">
+                  
+                  <div *ngIf="!isDisqualified(team.disqualified)" >
+                    
+                    {{team.teamName}}
+                  </div>
+                  <div *ngIf="isDisqualified(team.disqualified)" style="text-decoration: line-through;color: red;">
+                    {{team.teamName}}
+                  </div>  
+                </td>
               </ng-container>
             
               <!-- Points Column -->
               <ng-container matColumnDef="points">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Points </th>
-                <td mat-cell *matCellDef="let team"> {{team.points}} </td>
+                <td mat-cell *matCellDef="let team">
+                  <div *ngIf="!isDisqualified(team.disqualified)" >
+                    
+                    {{team.points}}
+                  </div>
+                  <div *ngIf="isDisqualified(team.disqualified)" style="text-decoration: line-through;color: red;">
+                    {{team.points}}
+                  </div>    
+                </td>
               </ng-container>
             
               <!-- wins Column -->
               <ng-container matColumnDef="wins">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Wins </th>
-                <td mat-cell *matCellDef="let team"> {{team.wins}} </td>
+                <td mat-cell *matCellDef="let team"> 
+                  <div *ngIf="!isDisqualified(team.disqualified)" >
+                    
+                    {{team.wins}}
+                  </div>
+                  <div *ngIf="isDisqualified(team.disqualified)" style="text-decoration: line-through;color: red;">
+                    {{team.wins}}
+                  </div>    
+                </td>
               </ng-container>
       
                <!-- losses Column -->
                <ng-container matColumnDef="losses">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Losses </th>
-                  <td mat-cell *matCellDef="let team"> {{team.losses}} </td>
+                  <td mat-cell *matCellDef="let team"> 
+                    <div *ngIf="!isDisqualified(team.disqualified)" >
+                    
+                      {{team.losses}}
+                    </div>
+                    <div *ngIf="isDisqualified(team.disqualified)" style="text-decoration: line-through;color: red;">
+                      {{team.losses}}
+                    </div>    
+                  </td>
                 </ng-container>
       
                  <!-- rounds won Column -->
               <ng-container matColumnDef="roundsWon">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Rounds Won </th>
-                  <td mat-cell *matCellDef="let team"> {{team.roundsWon}} </td>
+                  <td mat-cell *matCellDef="let team"> 
+                    <div *ngIf="!isDisqualified(team.disqualified)" >
+                    
+                      {{team.roundsWon}}
+                    </div>
+                    <div *ngIf="isDisqualified(team.disqualified)" style="text-decoration: line-through;color: red;">
+                      {{team.roundsWon}}
+                    </div>    
+                  </td>
                 </ng-container>
       
                  <!-- rounds lost Column -->
               <ng-container matColumnDef="roundsLost">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Rounds Lost </th>
-                  <td mat-cell *matCellDef="let team"> {{team.roundsLost}} </td>
+                  <td mat-cell *matCellDef="let team">
+                    <div *ngIf="!isDisqualified(team.disqualified)" >
+                    
+                      {{team.roundsLost}}
+                    </div>
+                    <div *ngIf="isDisqualified(team.disqualified)" style="text-decoration: line-through;color: red;">
+                      {{team.roundsLost}}
+                    </div>    
+                  </td>
                 </ng-container>
             
               <tr mat-header-row *matHeaderRowDef="columns"></tr>

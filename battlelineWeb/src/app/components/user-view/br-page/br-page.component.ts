@@ -32,4 +32,14 @@ export class BrPageComponent implements OnInit {
         });
     });
   }
+
+
+  isDisqualified(status: boolean){
+    if(status){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 }

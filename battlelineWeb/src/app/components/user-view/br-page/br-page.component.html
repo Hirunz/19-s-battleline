@@ -10,25 +10,55 @@
                 <!-- ID Column -->
                 <ng-container matColumnDef="playerId">
                   <th mat-header-cell *matHeaderCellDef> Player ID </th>
-                  <td mat-cell *matCellDef="let player"> {{player.playerId}} </td>
+                  <td mat-cell *matCellDef="let player">
+                    <div *ngIf="!isDisqualified(player.disqualified)" >
+                    
+                      {{player.playerId}} 
+                    </div>
+                    <div *ngIf="isDisqualified(player.disqualified)" style="text-decoration: line-through;color: red;">
+                      {{player.playerId}} 
+                    </div>  
+                  </td>
                 </ng-container>
               
                 <!-- Name Column -->
                 <ng-container matColumnDef="playerName">
                   <th mat-header-cell *matHeaderCellDef>Player Name </th>
-                  <td mat-cell *matCellDef="let player"> {{player.playerName}} </td>
+                  <td mat-cell *matCellDef="let player"> 
+                    <div *ngIf="!isDisqualified(player.disqualified)" >
+                    
+                      {{player.playerName}} 
+                    </div>
+                    <div *ngIf="isDisqualified(player.disqualified)" style="text-decoration: line-through;color: red;">
+                      {{player.playerName}} 
+                    </div>  
+                  </td>
                 </ng-container>
               
                 <!-- Points Column -->
                 <ng-container matColumnDef="points">
                   <th mat-header-cell *matHeaderCellDef> Points </th>
-                  <td mat-cell *matCellDef="let player"> {{player.points}} </td>
+                  <td mat-cell *matCellDef="let player"> 
+                    <div *ngIf="!isDisqualified(player.disqualified)" >
+                    
+                      {{player.points}} 
+                    </div>
+                    <div *ngIf="isDisqualified(player.disqualified)" style="text-decoration: line-through;color: red;">
+                      {{player.points}} 
+                    </div> </td>
                 </ng-container>
         
                  <!-- Kills Column -->
                 <ng-container matColumnDef="kills">
                     <th mat-header-cell *matHeaderCellDef> Kills </th>
-                    <td mat-cell *matCellDef="let player"> {{player.kills}} </td>
+                    <td mat-cell *matCellDef="let player">
+                      <div *ngIf="!isDisqualified(player.disqualified)" >
+                    
+                        {{player.kills}} 
+                      </div>
+                      <div *ngIf="isDisqualified(player.disqualified)" style="text-decoration: line-through;color: red;">
+                        {{player.kills}} 
+                      </div> </td>
                 </ng-container>
               
                 <tr mat-header-row *matHeaderRowDef="columns"></tr>

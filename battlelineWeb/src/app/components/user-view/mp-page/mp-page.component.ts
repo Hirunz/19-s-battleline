@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./mp-page.component.css']
 })
 export class MpPageComponent implements OnInit,AfterViewInit {
+ 
 
   public mpTeams!: IMPTeam[];
   public columns: string[]=["id","name","points","wins","losses","roundsWon","roundsLost"];
@@ -47,11 +48,27 @@ export class MpPageComponent implements OnInit,AfterViewInit {
         }
         // console.log("Test 1 " + this.tableData.data)
       });
-      console.log("Test 2" + this.tableData.data)
+      // console.log("Test 2" + this.tableData.data)
     });
-    console.log("Test 3" + this.tableData.data)
+    // console.log("Test 3" + this.tableData.data)
   }
+
+
+  isDisqualified(status: boolean){
+    if(status){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+
+
 }
+
+
+
 
 
 
