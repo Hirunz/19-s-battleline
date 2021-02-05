@@ -30,6 +30,7 @@ export class BrScoresComponent implements OnInit {
   public brPlayers: IBrPlayer[] = [];
 
   // Labels
+  public playerId = 0;
   public playerName = "";
   public playerRank = 0;
   public kills = 0;
@@ -48,6 +49,7 @@ export class BrScoresComponent implements OnInit {
   constructor(private databaseService: DatabaseService) { 
     this.getPlayers();    
     this.brPlayersForm = new FormGroup({
+      'playerId': new FormControl({value: '', disabled: true}),
       'playerName': new FormControl(''),
       'rank': new FormControl(''),
       'kills': new FormControl(''),
@@ -76,7 +78,7 @@ export class BrScoresComponent implements OnInit {
           //----------------------------------------------------------------------
           
           // auto increment player id and set disqaulifed value
-          userInput.playerId = this.brPlayers.length+1001;
+          this.playerId = this.brPlayers.length+1001;
           userInput.disqualified = this.disqualified;
           
         } else {
@@ -95,6 +97,8 @@ export class BrScoresComponent implements OnInit {
       }
 
       userInput.points = this.points;
+      userInput.playerId = this.playerId;
+      console.log(userInput)
 
       // set text values to confirm
       this.playerName = userInput.playerName;
@@ -109,6 +113,7 @@ export class BrScoresComponent implements OnInit {
           console.log(this.points)
           this.databaseService.updateBrPlayer(this.player);
         } else {
+          console.log(userInput)
           this.databaseService.addBrPlayer(userInput);
         }
 
@@ -157,7 +162,7 @@ export class BrScoresComponent implements OnInit {
 
   private validateForm() : boolean{
     let userInput=this.brPlayersForm.value;
-    if (userInput.playerName=="" || userInput.rank=="" || userInput.kills==""){
+    if (userInput.playerName=="" || userInput.rank.length==0 || userInput.kills.length==0){
       return true;
     }
     return false;

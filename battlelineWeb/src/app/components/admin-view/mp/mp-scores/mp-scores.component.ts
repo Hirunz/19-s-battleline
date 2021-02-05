@@ -164,8 +164,8 @@ export class MpScoresComponent implements OnInit {
     if(!this.validateForm()){
       this.showEmptyValueError = false;
       if(this.team1Name !="Team Not Found" && this.team2Name !="Team Not Found"){
-        if(userInput.team1Rounds<0 || userInput.team1Rounds>5
-          || userInput.team2Rounds<0 ||userInput.team2Rounds>5){
+        if(userInput.team1Rounds<0 || userInput.team1Rounds>10
+          || userInput.team2Rounds<0 ||userInput.team2Rounds>10){
             this.verify=false;
             this.verifyErr=true;
           }
@@ -281,7 +281,7 @@ export class MpScoresComponent implements OnInit {
 
   private validateForm() : boolean{
       let userInput=this.mpMatchForm.value;
-      if (userInput.team1Rounds=="" || userInput.team2Rounds==""){
+      if (userInput.team1Rounds.length==0 || userInput.team2Rounds.length==0){
         return true;
       }
       return false;
